@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Uttarakhand - Heaven on Earth</title>
+    <style>
+        /* Reset and Base Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #1e8b4d;
+            --primary-dark: #156d3b;
+            --secondary-color: #ff6b35;
+            --secondary-dark: #e85a2a;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --heading-font: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .animate-fadeIn { animation: fadeIn 1s ease forwards; }
+        .animate-slideInLeft { animation: slideInLeft 1s ease forwards; }
+        .animate-slideInRight { animation: slideInRight 1s ease forwards; }
+        .animate-pulse { animation: pulse 2s infinite; }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 0.5rem 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover .logo-icon {
+            transform: rotate(15deg);
+        }
+        
+        .logo h1 {
+            font-family: var(--heading-font);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .logo h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .logo:hover h1::after {
+            width: 100%;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+        
+        .nav-links a {
+            font-weight: 600;
+            color: var(--dark-color);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 1001;
+        }
+        
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--dark-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 8px; }
+        .hamburger span:nth-child(3) { top: 16px; }
+        
+        .hamburger.active span:nth-child(1) {
+            top: 8px;
+            transform: rotate(45deg);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            top: 8px;
+            transform: rotate(-45deg);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("backpacker-standing-sunrise-viewpoint-ja-bo-village-mae-hong-son-province-thailand_335224-1356.avif") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #1e6b4e;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #174d38;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Search Section */
+        .search-section {
+            background-color: white;
+            padding: 2rem 5%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: -50px;
+            border-radius: 10px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .search-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+        }
+        
+        .search-box {
+            flex: 1 1 200px;
+        }
+        
+        .search-box label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .search-box select,
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        
+        .search-button {
+            background-color: #ff6b35;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 24px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .search-button:hover {
+            background-color: #e85a2a;
+        }
+        
+        /* Destinations Section */
+        .destinations {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #777;
+            margin-bottom: 3rem;
+        }
+        
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .destination-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            text-align: left;
+        }
+        
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1e6b4e;
+        }
+        
+        .card-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Experiences Section */
+        .experiences {
+            padding: 5rem 5%;
+            background-color: #f9f9f9;
+        }
+        
+        .experiences-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .experience-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex: 1 1 300px;
+            max-width: 350px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .experience-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .experience-icon {
+            font-size: 2.5rem;
+            color: #1e6b4e;
+            margin-bottom: 1rem;
+        }
+        
+        .experience-box h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .experience-box p {
+            color: #666;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #ddd;
+            padding: 4rem 5% 2rem;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            gap: 2rem;
+        }
+        
+        .footer-column {
+            flex: 1 1 200px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-column h3:after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 2px;
+            background-color: #1e6b4e;
+            margin-top: 0.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #1e6b4e;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 2rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .destinations-grid, 
+            .experiences-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                margin-bottom: 1rem;
+            }
+        }
+         /* Footer */
+         footer {
+            background-color: #1a5276;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #3498db;
+        }
+        
+        .footer-col p {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin-right: 10px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">🏔️</div>
+                <h1>Uttarakhand सारथी</h1>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#destinations">Destinations</a></li>
+                    <li><a href="#experiences">Experiences</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contacts</a></li>
+                
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Discover <span>Uttarakhand</span></h2>
+            <p>देवभूमि की दिव्य सुंदरता का अनुभव करें - राजसी हिमालय से लेकर पवित्र नदियों, प्राचीन मंदिरों से लेकर जीवंत संस्कृति तक।</p>
+            <div class="cta-buttons">
+                <a href="plan.html" class="cta-button">Plan your Trip</a>
+                <a href="WhatsApp Video 2025-05-10 at 12.27.09 PM.mp4" class="cta-button secondary">Watch Video</a>
+            </div>
+        </div>
+        <div class="scroll-down" id="scroll-to-search">
+        
+            <span></span>
+        </div>
+    </section>
+    
+    <section class="search-section">
+        <div class="search-container">
+            <div class="search-box">
+                <label for="destination">Where to?</label>
+                <select id="destination">
+                    <option value="">Select Destination</option>
+                    <option value="rishikesh">Rishikesh</option>
+                    <option value="mussoorie">Mussoorie</option>
+                    <option value="nainital">Nainital</option>
+                    <option value="haridwar">Haridwar</option>
+                    <option value="auli">Auli</option>
+                    <option value="jim-corbett">Jim Corbett</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <label for="activity">What to do?</label>
+                <select id="activity">
+                    <option value="">Select Activity</option>
+                    <option value="pilgrimage">Pilgrimage</option>
+                    <option value="trekking">Trekking</option>
+                    <option value="wildlife">Wildlife</option>
+                    <option value="adventure">Adventure Sports</option>
+                    <option value="camping">Camping</option>
+                    <option value="wellness">Wellness & Yoga</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <label for="checkin">Check In</label>
+                <input type="date" id="checkin">
+            </div>
+            <div class="search-box">
+                <label for="checkout">Check Out</label>
+                <input type="date" id="checkout">
+            </div>
+            <button class="search-button"><a href="plan.html">Search</a></button>
+        </div>
+    </section>
+    
+    <section class="destinations" id="destinations">
+        <h2 class="section-title">Popular Destinations</h2>
+        <p class="section-subtitle">Explore the breathtaking landscapes and spiritual havens of Uttarakhand</p>
+        
+        <div class="destinations-grid">
+            <div class="destination-card" data-aos="fade-up">
+                <div class="card-badge">Popular</div>
+                <div class="card-image-container">
+                    <img src="RISHIKESH.webp" alt="Rishikesh" class="card-image">
+                </div>
+                <div class="card-content">
+                    <h3>Rishikesh</h3>
+                    <p>The yoga capital of the world, offering spiritual enlightenment and thrilling river rafting experiences.</p>
+                    <div class="card-meta">
+                        <div class="card-rating">
+                            <span>★★★★★</span> 4.8
+                        </div>
+                        <div class="card-category">Adventure & Spirituality</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <img src="mussorie.jpg" alt="Mussoorie" class="card-image">
+                <div class="card-content">
+                    <h3>Mussoorie</h3>
+                    <p>The "Queen of Hills" with mesmerizing views of Himalayan ranges and colonial charm.</p>
+                    <div class="card-meta">
+                        <span>4.6 ★★★★★</span>
+                        <span>Hill Station</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <img src="nanital.jpg" alt="Nainital" class="card-image">
+                <div class="card-content">
+                    <h3>Nainital</h3>
+                    <p>Famous for its pear-shaped lake surrounded by mountains, offering boating and panoramic views.</p>
+                    <div class="card-meta">
+                        <span>4.7 ★★★★★</span>
+                        <span>Lake & Mountains</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <img src="haridwar.jpg" alt="Haridwar" class="card-image">
+                <div class="card-content">
+                    <h3>Haridwar</h3>
+                    <p>One of the seven holiest places for Hindus, famous for Ganga Aarti and Kumbh Mela.</p>
+                    <div class="card-meta">
+                        <span>4.9 ★★★★★</span>
+                        <span>Pilgrimage</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <img src="auli.jpg" alt="Auli" class="card-image">
+                <div class="card-content">
+                    <h3>Auli</h3>
+                    <p>A premier ski destination with breathtaking views of Nanda Devi and other Himalayan peaks.</p>
+                    <div class="card-meta">
+                        <span>4.7 ★★★★★</span>
+                        <span>Skiing & Winter Sports</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <img src="jim korbett.jpg" alt="Jim Corbett National Park" class="card-image">
+                <div class="card-content">
+                    <h3>Jim Corbett</h3>
+                    <p>India's oldest national park known for its Bengal tigers, elephants and diverse wildlife.</p>
+                    <div class="card-meta">
+                        <span>4.8 ★★★★★</span>
+                        <span>Wildlife & Safari</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="experiences" id="experiences">
+        <h2 class="section-title">Unforgettable Experiences</h2>
+        <p class="section-subtitle">Immerse yourself in the diverse activities Uttarakhand has to offer</p>
+        
+        <div class="experiences-container">
+            <div class="experience-box">
+                <div class="experience-icon">🏞️</div>
+                <h3>Trekking Adventures</h3>
+                <p>Explore stunning trails leading to meadows, glaciers, and peaks with breathtaking views of the Himalayas.</p>
+            </div>
+            
+            <div class="experience-box">
+                <div class="experience-icon">🧘‍♀️</div>
+                <h3>Yoga & Meditation</h3>
+                <p>Find inner peace and rejuvenation at the birthplace of yoga, with world-renowned ashrams and retreats.</p>
+            </div>
+            
+            <div class="experience-box">
+                <div class="experience-icon">🚣‍♂️</div>
+                <h3>River Rafting</h3>
+                <p>Experience the thrill of white water rafting in the sacred Ganges with rapids ranging from grade 1 to 5.</p>
+            </div>
+            
+            <div class="experience-box">
+                <div class="experience-icon">🕯️</div>
+                <h3>Spiritual Pilgrimage</h3>
+                <p>Embark on sacred journeys to Char Dham, Hemkund Sahib, and other divine destinations.</p>
+            </div>
+            
+            <div class="experience-box">
+                <div class="experience-icon">🏔️</div>
+                <h3>Mountain Skiing</h3>
+                <p>Glide through the snow-covered slopes of Auli, one of India's premier skiing destinations.</p>
+            </div>
+            
+            <div class="experience-box">
+                <div class="experience-icon">🐯</div>
+                <h3>Wildlife Safari</h3>
+                <p>Spot the magnificent Bengal tiger, elephants, and diverse flora and fauna at Jim Corbett National Park.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Breathtaking Sights</h2>
+        <p class="section-subtitle">A glimpse of what awaits you in the magical land of Uttarakhand</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="Mt._Nanda_Devi.jpg" alt="Mountain View">
+                <div class="gallery-caption">Nanda Devi Peak</div>
+            </div>
+            <div class="gallery-item">
+                <img src="valley of flowers.jpg" alt="Valley of Flowers">
+                <div class="gallery-caption">Valley of Flowers</div>
+            </div>
+            <div class="gallery-item">
+                <img src="kedarnath.jpg" alt="Kedarnath Temple">
+                <div class="gallery-caption">Kedarnath Temple</div>
+            </div>
+            <div class="gallery-item">
+                <img src="naini lake.jpg" alt="Naini Lake">
+                <div class="gallery-caption">Naini Lake</div>
+            </div>
+            <div class="gallery-item">
+                <img src="river rafting.webp" alt="River Rafting">
+                <div class="gallery-caption">Rafting in Rishikesh</div>
+            </div>
+            <div class="gallery-item">
+                <img src="ski resort.jpg" alt="Ski Resort">
+                <div class="gallery-caption">Auli Ski Resort</div>
+            </div>
+            <div class="gallery-item">
+                <img src="forest trail.jpg" alt="Forest Trail">
+                <div class="gallery-caption">Jim Corbett Trails</div>
+            </div>
+            <div class="gallery-item">
+                <img src="ganga arti.jpg" alt="Ganga Aarti">
+                <div class="gallery-caption">Ganga Aarti at Haridwar</div>
+            </div>
+        </div>
+    </section>
+    
+         
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>About Uttarakhand Tourism</h4>
+                    <p>Uttarakhand Tourism is committed to providing visitors with authentic experiences while promoting sustainable tourism practices that preserve the state's natural beauty and cultural heritage.</p>
+                    <div class="social-links">
+                        
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#experiences">Experience</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="tips.html">Travel Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Plan Your Visit</h4>
+                    <ul class="footer-links">
+                        <li><a href="visit.html">Best Time to Visit</a></li>
+                        <li><a href="travel.html">How to Reach</a></li>
+                        <li><a href="accommodation.html">Accommodations</a></li>
+                        <li><a href="packages.html">Tour Packages</a></li>
+                        <li><a href="local.html">Local Transportation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Information</h4>
+                    <ul class="footer-links">
+                        Email: <a href="mailto:deepubisht6398@gmail.com">deepubisht6398@gmail.com</a>
+                        <li>Phone: 8979432249</li>
+                        <li>Address: Uttarakhand सारथी Board, Nainital, Uttarakhand, India</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Uttarakhand सारथी. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+            

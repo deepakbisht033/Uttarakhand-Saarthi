@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uttarakhand Accommodations</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+    }
+
+    header {
+      background: #2e8b57;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .featured {
+      background: url("background.jpg") no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2em;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px black;
+    }
+
+    .content {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .card img {
+      width: 100%;
+      max-width: 300px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+      flex: 1;
+    }
+
+    .card-content h3 {
+      margin-top: 0;
+      color: #2e8b57;
+    }
+
+    .card-content p {
+      color: #444;
+    }
+
+    footer {
+      background: #2e8b57;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        flex-direction: column;
+      }
+
+      .card img {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Uttarakhand सारथी Accommodations</h1>
+    <p>Discover stays in the heart of the Himalayas</p>
+  </header>
+
+  <div class="featured">
+    Explore Peaceful Getaways
+  </div>
+
+  <div class="content">
+    <div class="card">
+      <img src="hotel1.jpg" alt="Accommodation in Nainital" />
+      <div class="card-content">
+        <h3>Himalayan View Retreat, Nainital</h3>
+        <p>Enjoy the misty mornings and lake views from this cozy retreat located in the hills of Nainital.</p>
+        <p><strong>Price:</strong> ₹2,500/night</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="hotel2.jpg" alt="Rishikesh Resort" />
+      <div class="card-content">
+        <h3>Riverfront Resort, Rishikesh</h3>
+        <p>Stay by the Ganges with yoga sessions and serene surroundings. Perfect for spiritual seekers.</p>
+        <p><strong>Price:</strong> ₹3,200/night</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="hotel3.jpg" alt="Chopta Homestay" />
+      <div class="card-content">
+        <h3>Chopta Mountain Homestay</h3>
+        <p>Experience the raw beauty of Uttarakhand at this rustic homestay nestled in the valley of Chopta.</p>
+        <p><strong>Price:</strong> ₹1,800/night</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Uttarakhand सारथी. All Rights Reserved.
+  </footer>
+
+</body>
+</html>

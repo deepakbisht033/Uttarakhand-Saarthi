@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plan Your Trip - Uttarakhand Tourism</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f5f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #2e8b57;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #1e5e3c;
+    }
+
+    .dropdown-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      background-color: #1e5e3c;
+    }
+
+    .dropdown-menu > li {
+      position: relative;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 14px 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: #256f45;
+    }
+
+    .submenu {
+      display: none;
+      position: absolute;
+      background-color: #3b8d64;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      top: 100%;
+      left: 0;
+      min-width: 150px;
+      z-index: 999;
+    }
+
+    .submenu li a {
+      padding: 10px;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu li:hover .submenu {
+      display: block;
+    }
+
+    .map-container-top img {
+        margin:auto;
+      width: 100%;
+      height: 600px;
+      border: none;
+
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: #2e8b57;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      color: #444;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      background: #2e8b57;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #256f45;
+    }
+
+    footer {
+      text-align: center;
+      background: #2e8b57;
+      color: white;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 15px;
+      }
+
+      input, select, textarea {
+        font-size: 0.95em;
+      }
+
+      .dropdown-menu {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .dropdown-menu li {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Plan Your Trip to Uttarakhand</h1>
+    <p>Customize your itinerary and book your journey with ease</p>
+  </header>
+
+  <!-- Navigation Menu -->
+  <nav>
+    <ul class="dropdown-menu">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <a href="#destination">Destinations</a>
+        <ul class="submenu">
+          <li><a href="#">Nainital</a></li>
+          <li><a href="#">Mussoorie</a></li>
+          <li><a href="#">Kedarnath</a></li>
+          <li><a href="#">Rishikesh</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Plan Your Trip</a></li>
+    </ul>
+  </nav>
+
+  <!-- Map -->
+  <div class="map-container-top">
+       <img src="map1.jpg"></img>
+
+  </div>
+
+  <!-- Form -->
+  <div class="container">
+    <h2>Personal & Trip Details</h2>
+    <form action="https://formspree.io/f/xldbwged" method="post">
+
+      <!-- Personal Details -->
+      <h3>Personal Information</h3>
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Your full name" required>
+
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" id="mobile" name="mobile" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
+
+      <label for="email">Email ID</label>
+      <input type="email" id="email" name="email" placeholder="yourname@example.com" required>
+
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="3" placeholder="Your residential address" required></textarea>
+
+      <!-- Trip Preferences -->
+      <h3>Trip Preferences</h3>
+
+      <label for="destination">Select Destination</label>
+      <select id="destination" name="destination" required>
+        <option value="" disabled selected>Select a Destination</option>
+        <option value="Nainital">Nainital</option>
+        <option value="Mussoorie">Mussoorie</option>
+        <option value="Kedarnath">Kedarnath</option>
+        <option value="Badrinath">Badrinath</option>
+        <option value="Gangotri">Gangotri</option>
+        <option value="Yamnotri">Yamnotri</option>
+        <option value="Kainchi Dham">Kainchi Dham</option>
+        <option value="Haridwar">Haridwar</option>
+        <option value="Mukteswer">Mukteswer</option>
+        <option value="National park">National park</option>
+        <option value="Jim Corbett">Jim Corbett</option>
+        <option value="Rishikesh">Rishikesh</option>
+        <option value="Auli">Auli</option>
+      </select>
+
+      <label for="dates">Travel Date</label>
+      <input type="date" id="dates" name="travel_date" required />
+
+      <label for="accommodation">Accommodation Type</label>
+      <select id="accommodation" name="accommodation" required>
+        <option value="" disabled selected>Select Accommodation</option>
+        <option value="Hotel">Hotel</option>
+        <option value="Resort">Resort</option>
+        <option value="Camping">Camping</option>
+        <option value="Guest House">Guest House</option>
+      </select>
+
+      <label for="transport">Preferred Transport</label>
+      <select id="transport" name="transport" required>
+        <option value="" disabled selected>Select Transport</option>
+        <option value="Cab">Cab</option>
+        <option value="Train">Train</option>
+        <option value="Bus">Bus</option>
+        <option value="Self-drive">Self-drive</option>
+      </select>
+
+      <label for="activities">Activities & Interests</label>
+      <select id="activities" name="activities" required>
+        <option value="" disabled selected>Select an Activity</option>
+        <option value="Trekking">Trekking</option>
+        <option value="Wildlife Safari">Wildlife Safari</option>
+        <option value="Yoga & Wellness">Yoga & Wellness</option>
+        <option value="Religious">Pilgrimage</option>
+        <option value="Adventure Sports">Adventure Sports</option>
+      </select>
+
+      <label for="budget">Budget Range (INR)</label>
+      <input type="number" id="budget" name="budget" placeholder="e.g. 10000 - 50000" required />
+
+      <label for="people">Number of Travelers</label>
+      <input type="text" id="people" name="travelers" placeholder="e.g. 2 Adults, 1 Kid" required />
+
+      <button type="submit">Submit Plan</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Uttarakhand सारथी. All Rights Reserved.
+  </footer>
+
+</body>
+</html>
